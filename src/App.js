@@ -1,11 +1,15 @@
 import React from 'react';
-import PracticeApp from './practiceApp/index';
+import Main from './practiceApp/components/mainComponent';
+import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <PracticeApp />
+      <Main />
     </div>
+    </BrowserRouter>
   );
 }
 

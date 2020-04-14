@@ -1,49 +1,28 @@
-import React, { Component } from "react";
-import DishDetail from './dishdetailComponent';
+import React from "react";
 
-export default class Menu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedDish: null,
-    };
-  }
-
-  toggleDishData = (selectedDish) =>
-    this.setState({ selectedDish: selectedDish });
-
-  renderDishData = (dish) => {
-    if (dish !== null) {
-      return <DishDetail selectedDish={dish}/>;
-    } else {
-      return null;
-    }
-  };
-
-  render = () => {
-    const dishMenu = this.props.dishes.map((item, index) => {
-      return (
-        <div class="col-12 col-md-5 m-1" key={item.id}>
-          <div
-            class="card bg-dark text-white"
-            onClick={() => this.toggleDishData(item)}
-          >
-            <img class="card-img" src={item.image} alt="Card image" />
-            <div class="card-img-overlay">
-              <h5 class="card-title">{item.name}</h5>
-            </div>
-          </div>
-        </div>
-      );
-    });
-
-    return (
-      <div className="container">
-        <div className="row">
-          {dishMenu}
-          </div>  
-          {this.renderDishData(this.state.selectedDish)}
-        </div>
-    );
-  };
+function RenderMenuItem({ dish, onClick }) {
+  return (
+    <div className="card bg-dark text-white" onClick={() => onClick(dish.id)}>
+      <img className="card-img" src={dish.image} alt="Card image" />
+      <div className="card-img-overlay">
+        <h5 className="card-title">{dish.name}</h5>
+      </div>
+    </div>
+  );
 }
+
+export const Menu = (props) => {
+  const menu = props.dishes.map((dish) => {
+    return (
+      <div className="col-12 col-md-5 m-1" key={dish.id}>
+        <RenderMenuItem dish={dish} onClick={props.onClick} />
+      </div>
+    );
+  });
+
+  return (
+    <div className="container">
+      <div className="row">{menu}</div>
+    </div>
+  );
+};
