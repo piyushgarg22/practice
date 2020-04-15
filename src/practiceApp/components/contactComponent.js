@@ -74,7 +74,7 @@ export default class Contact extends Component {
     )
       errors.telnum = "Tel Number should be less than 10 numbers";
 
-    if (this.state.touched.email && email.split("").filter((x) => x === "@"))
+    if (this.state.touched.email && email.split(" ").filter((x) => x === "@"))
       errors.email = "email should contain @";
 
     return errors;
