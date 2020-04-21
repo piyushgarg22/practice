@@ -24,7 +24,8 @@ export default class Contact extends Component {
 
   handleSubmit = (values) => {
     alert("user feedback data : " + JSON.stringify(values));
-    this.props.resetFeedbackForm();
+    this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
+    // this.props.resetFeedbackForm();
   };
 
   render() {

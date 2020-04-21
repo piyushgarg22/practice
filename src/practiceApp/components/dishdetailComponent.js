@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { baseUrl } from "../shared/baseUrl";
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 
 import {
   Breadcrumb,
@@ -37,7 +38,7 @@ class CommentForm extends Component {
   handleSubmit = (values) => {
     // alert("Comment Data : " + JSON.stringify(values));
     this.toggleModal();
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -137,23 +138,33 @@ class CommentForm extends Component {
 function RenderDish({ dish }) {
   return (
     <div className="col-12 col-lg-12 m-1">
+      <FadeTransform in  transfromProps={{
+          exitTransform: "scale(0.5) translate(-50%)",
+        }}>
       <div className="card mb-3">
-        <img className="card-img-top" src={baseUrl+ dish.image} alt="Card image cap" />
+        <img
+          className="card-img-top"
+          src={baseUrl + dish.image}
+          alt="Card image cap"
+        />
         <div className="card-body">
           <h5 className="card-title">{dish.name}</h5>
           <p className="card-text">{dish.description}</p>
         </div>
       </div>
+      </FadeTransform>
     </div>
   );
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
   return (
     <div className="col-12 col-lg-12 m-1">
       <h1>Comments</h1>
+      <Stagger in>
       {comments.map((comment) => (
         <ul className="list-unstyled" key={comment.id}>
+          <Fade in>
           <li>{comment.comment}</li>
           <li>
             --{comment.author} ,{" "}
@@ -163,9 +174,12 @@ function RenderComments({ comments, addComment, dishId }) {
               day: "2-digit",
             }).format(new Date(Date.parse(comment.date)))}
           </li>
+          </Fade>
         </ul>
+        
       ))}
-      <CommentForm dishId={dishId} addComment={addComment} />
+      </Stagger>
+      <CommentForm dishId={dishId} postComment={postComment} />
     </div>
   );
 }
@@ -209,7 +223,7 @@ export const DishDetail = (props) => {
           <div className="col-12 col-md-5 m-1">
             <RenderComments
               comments={props.comments}
-              addComment={props.addComment}
+              postComment={props.postComment}
               dishId={props.dish.id}
             />
           </div>

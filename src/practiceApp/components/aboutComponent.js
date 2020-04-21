@@ -8,11 +8,14 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import {baseUrl} from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 
 function RenderLeader({leader}) {
-  return <Media list>
+  return <Stagger in><Media list>
+   <Fade in>
   <Media left>
-    <Media object src={leader.image} alt="Generic placeholder image" />
+    <Media object src={baseUrl + leader.image} alt="Generic placeholder image" />
   </Media>
   <Media body>
     <Media heading>
@@ -23,7 +26,10 @@ function RenderLeader({leader}) {
     </Media>
     {leader.description}
   </Media>
+  </Fade>
+
 </Media>
+</Stagger>
 {/* <Media list>{leaders}</Media>; */}
 }
 
