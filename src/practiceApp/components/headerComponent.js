@@ -89,7 +89,7 @@ export default class Header extends Component {
                   </NavLink>
                 </NavItem>
               </Nav>
-              <Nav class="ml-auto" navbar>
+              <Nav className="ml-auto" navbar>
               <NavItem>
                 <Button outline onClick={this.toggleModal}>
                   Login
