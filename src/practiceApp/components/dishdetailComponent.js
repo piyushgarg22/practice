@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { baseUrl } from "../shared/baseUrl";
 
 import {
   Breadcrumb,
@@ -137,7 +138,7 @@ function RenderDish({ dish }) {
   return (
     <div className="col-12 col-lg-12 m-1">
       <div className="card mb-3">
-        <img className="card-img-top" src={dish.image} alt="Card image cap" />
+        <img className="card-img-top" src={baseUrl+ dish.image} alt="Card image cap" />
         <div className="card-body">
           <h5 className="card-title">{dish.name}</h5>
           <p className="card-text">{dish.description}</p>
